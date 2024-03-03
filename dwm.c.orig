@@ -1180,7 +1180,8 @@ monocle(Monitor *m)
 	if (n > 0) /* override layout symbol */
 		snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n);
 	for (c = nexttiled(m->clients); c; c = nexttiled(c->next))
-		resize(c, m->wx, m->wy, m->ww - 2 * c->bw, m->wh - 2 * c->bw, 0);
+		resize(c, m->wx - c->bw, m->wy - singularborder_baradjustment(c),
+			m->ww, m->wh - c->bw * m->showbar, False);
 }
 
 void
@@ -1704,7 +1705,23 @@ showhide(Client *c)
 	}
 }
 
+int
+singularborder_baradjustment(Client *c)
+{
+	return c->bw * !(c->mon->showbar && topbar);
+}
 
+int
+singularborder_baradjustment(Client *c)
+{
+	return c->bw * !(c->mon->showbar && topbar);
+}
+
+int
+singularborder_baradjustment(Client *c)
+{
+	return c->bw * !(c->mon->showbar && topbar);
+}
 
 int
 singularborder_baradjustment(Client *c)
