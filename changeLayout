@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Get the current layout
+current_layout=$(setxkbmap -query | grep layout | awk '{print $2}')
+
+# Toggle between cz and cz_custom
+if [ "$current_layout" == "cz" ]; then
+    setxkbmap cz_custom
+else
+    setxkbmap cz
+fi

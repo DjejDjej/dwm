@@ -62,6 +62,8 @@ static const char *browser[]  =    {"thorium-browser", NULL };
 static const char *discord[]  =    {"discord",NULL};
 static const char *pavucontrol[] = {"pavucontrol",NULL};
 static const char *codium[] = 	   {"codium",NULL};
+static const char *togglelayoutcmd[] = { "changeLayout", NULL };
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                      	XK_r,	   spawn,          {.v = browser } },
@@ -70,10 +72,12 @@ static const Key keys[] = {
 	{ MODKEY,						XK_d,	   spawn,		   {.v = discord } },
 	{ MODKEY,						XK_m,	   spawn,	   	   {.v = pavucontrol} },
 	{ MODKEY,						XK_c,	   spawn,	  	   {.v = codium     } },
-	{ MODKEY,						XK_q,      killclient,     {0} },
+	{ MODKEY,             			XK_y,      spawn,          {.v = togglelayoutcmd} },
+    { MODKEY,						XK_q,      killclient,     {0} },
 	{ MODKEY,             			XK_End,    quit,           {0} },
 
-	//
+
+	///
 	{ MODKEY,                       XK_Up,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_Down,    focusstack,     {.i = -1 } },
 
@@ -87,20 +91,25 @@ static const Key keys[] = {
 	
 	{ MODKEY,            			XK_Tab,    shiftviewclients, { .i = +1 } },
 	{ MODKEY|ShiftMask,            	XK_Tab,    shiftviewclients, { .i = +-1 } },
-	
 
-
-
-
-TAGKEYS(                        XK_plus,                        0)
-TAGKEYS(                        XK_ecaron,                      1)  // ě
-TAGKEYS(                        XK_scaron,                      2)  // š
-TAGKEYS(                        XK_ccaron,                      3)  // č
-TAGKEYS(                        XK_rcaron,                      4)  // ř
-TAGKEYS(                        XK_zcaron,                      5)  // ž
-TAGKEYS(                        XK_yacute,                      6)  // ý
-TAGKEYS(                        XK_aacute,                      7)  // á
-TAGKEYS(                        XK_iacute,                      8)  // í
+    TAGKEYS(                        XK_1,                           0)
+    TAGKEYS(                        XK_2,                           1)
+    TAGKEYS(                        XK_3,                           2)
+    TAGKEYS(                        XK_4,                           3)
+    TAGKEYS(                        XK_5,                           4)
+    TAGKEYS(                        XK_6,                           5)
+    TAGKEYS(                        XK_7,                           6)
+    TAGKEYS(                        XK_8,                           7)
+    TAGKEYS(                        XK_9,                           8)	
+    TAGKEYS(                        XK_plus,                        0)
+    TAGKEYS(                        XK_ecaron,                      1)  // ě
+    TAGKEYS(                        XK_scaron,                      2)  // š
+    TAGKEYS(                        XK_ccaron,                      3)  // č
+    TAGKEYS(                        XK_rcaron,                      4)  // ř
+    TAGKEYS(                        XK_zcaron,                      5)  // ž
+    TAGKEYS(                        XK_yacute,                      6)  // ý
+    TAGKEYS(                        XK_aacute,                      7)  // á
+    TAGKEYS(                        XK_iacute,                      8)  // í
 
 };
 
