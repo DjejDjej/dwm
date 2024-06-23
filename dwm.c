@@ -235,6 +235,7 @@ static void deccnmaster(const Arg *arg);
 
 //
 static void shiftviewclients(const Arg *arg);
+void run_barM(void);
 
 
 /* variables */
@@ -320,6 +321,16 @@ shiftviewclients(const Arg *arg)
 	view(&shifted);
 }
 //
+void run_barM(void) {
+    if (fork() == 0) {
+        setsid();
+        execlp("barM", "barM", NULL);
+        fprintf(stderr, "dwm: exec barM failed\n");
+        exit(EXIT_SUCCESS);
+    }
+}
+
+
 
 
 
@@ -1708,6 +1719,7 @@ setup(void)
 	XChangeWindowAttributes(dpy, root, CWEventMask|CWCursor, &wa);
 	XSelectInput(dpy, root, wa.event_mask);
 	grabkeys();
+  run_barM();
 	focus(NULL);
 }
 

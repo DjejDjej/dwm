@@ -19,14 +19,17 @@ static const char *colors[][3]      = {
 	[SchemeSel]  = { col_white, col_black,  col_grey  },
 };
 
+
+
+
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 
 	/* class      		instance    title       tags mask     isfloating   monitor */
-	{ "Thorium-browser",NULL,       NULL,         1,       		0,           -1 },
-	{ "Alacritty"	   ,NULL,       NULL,         2,       		0,           -1 },
+	{ "firefox",        NULL,       NULL,         1,       		0,           -1 },
+	{ "Alacritty",	    NULL,       NULL,         2,       		0,           -1 },
 	{ "VSCodium", 		NULL,       NULL,         4,      		0,           -1 },
 	{ "discord", 		NULL,       NULL,         8,      		0,           -1 },
 
@@ -37,6 +40,12 @@ static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] 
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
+
+
+/* key definitions */
+
+/* helper for spawning shell commands in the pre dwm-5.0 fashion */
+#define SHCMD(cmd) { .v = (const char*[]){ "/bin/bash", "-c", cmd, NULL } }
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -54,27 +63,31 @@ static const Layout layouts[] = {
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/bash", "-c", cmd, NULL } }
 
+
+
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] =    {"dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_black, "-nf", col_white, "-sb", col_black, "-sf", col_white, NULL };
 static const char *termcmd[]  =    {"alacritty", NULL };
-static const char *browser[]  =    {"thorium-browser", NULL };
+static const char *browser[]  =    {"firefox", NULL };
 static const char *discord[]  =    {"discord",NULL};
 static const char *pavucontrol[] = {"pavucontrol",NULL};
 static const char *codium[] = 	   {"codium",NULL};
 static const char *togglelayoutcmd[] = { "changeLayout", NULL };
+static const char *screenshotcmd[] = { "zsh", "-c", "scrot -s /tmp/screenshot.png && xclip -selection clipboard -t image/png /tmp/screenshot.png", NULL };
 
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                      	XK_r,	   spawn,          {.v = browser } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,          				XK_t, 	   spawn,          {.v = termcmd } },
-	{ MODKEY,						XK_d,	   spawn,		   {.v = discord } },
-	{ MODKEY,						XK_m,	   spawn,	   	   {.v = pavucontrol} },
-	{ MODKEY,						XK_c,	   spawn,	  	   {.v = codium     } },
-	{ MODKEY,             			XK_y,      spawn,          {.v = togglelayoutcmd} },
-    { MODKEY,						XK_q,      killclient,     {0} },
-	{ MODKEY,             			XK_End,    quit,           {0} },
+	{ MODKEY,          							XK_t, 	   spawn,          {.v = termcmd } },
+	{ MODKEY,												XK_d,	   spawn,		   {.v = discord } },
+	{ MODKEY,												XK_m,	   spawn,	   	   {.v = pavucontrol} },
+	{ MODKEY,												XK_c,	   spawn,	  	   {.v = codium     } },
+	{ MODKEY,             					XK_y,      spawn,          {.v = togglelayoutcmd} },
+  { MODKEY,												XK_q,      killclient,     {0} },
+	{ MODKEY,             					XK_End,    quit,           {0} },
+  { MODKEY,     	               	XK_s ,   spawn,          {.v = screenshotcmd } },
 
 
 	///
@@ -89,7 +102,7 @@ static const Key keys[] = {
 
 	{ MODKEY,                       XK_Return, zoom,           {0} },
 	
-	{ MODKEY,            			XK_Tab,    shiftviewclients, { .i = +1 } },
+	{ MODKEY,        	    			XK_Tab,    shiftviewclients, { .i = +1 } },
 	{ MODKEY|ShiftMask,            	XK_Tab,    shiftviewclients, { .i = +-1 } },
 
     TAGKEYS(                        XK_1,                           0)
