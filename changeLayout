@@ -5,7 +5,9 @@ current_layout=$(setxkbmap -query | grep layout | awk '{print $2}')
 
 # Toggle between cz and cz_custom
 if [ "$current_layout" == "cz" ]; then
-    setxkbmap cz_custom
+    setxkbmap us_qwertz   
+
 else
     setxkbmap cz
 fi
+echo "WWWWWw"
