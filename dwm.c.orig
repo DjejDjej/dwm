@@ -235,6 +235,7 @@ static void deccnmaster(const Arg *arg);
 
 //
 static void shiftviewclients(const Arg *arg);
+void run_barM(void);
 
 
 /* variables */
@@ -320,6 +321,16 @@ shiftviewclients(const Arg *arg)
 	view(&shifted);
 }
 //
+void run_barM(void) {
+    if (fork() == 0) {
+        setsid();
+        execlp("barM", "barM", NULL);
+        fprintf(stderr, "dwm: exec barM failed\n");
+        exit(EXIT_SUCCESS);
+    }
+}
+
+
 
 
 
@@ -779,10 +790,14 @@ drawbar(Monitor *m)
 				if (moveright)
 					x -= tw;
 				if (m->sel) {
+					int mid = (m->ww - TEXTW(m->sel->name)) / 2 - x;
+			/* make sure name will not overlap on tags even when it is very long */
+					mid = mid >= lrpad / 2 ? mid : lrpad / 2;
 					drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
-					drw_text(drw, x, 0, moveright ? tw : m->ww, bh, lrpad / 2, m->sel->name, 0);
-					if (m->sel->isfloating)
-						drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
+	//	-			drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
+					drw_text(drw, x, 0, w, bh, mid, m->sel->name, 0);
+ 			if (m->sel->isfloating)
+ 				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
 				} else {
 					drw_setscheme(drw, scheme[SchemeNorm]);
 					drw_rect(drw, x, 0, tw, bh, 1, 1);
@@ -1380,12 +1395,26 @@ void
 resizeclient(Client *c, int x, int y, int w, int h)
 {
 	XWindowChanges wc;
+	unsigned int n;
+	Client *nbc;
 
 	c->oldx = c->x; c->x = wc.x = x;
 	c->oldy = c->y; c->y = wc.y = y;
 	c->oldw = c->w; c->w = wc.width = w;
 	c->oldh = c->h; c->h = wc.height = h;
 	wc.border_width = c->bw;
+
+	for (n = 0, nbc = nexttiled(c->mon->clients); nbc; nbc = nexttiled(nbc->next), n++);
+
+	if (c->isfloating || c->mon->lt[c->mon->sellt]->arrange == NULL) {
+	} else {
+		if (c->mon->lt[c->mon->sellt]->arrange == monocle || n == 1) {
+			wc.border_width = 0;
+			c->w = wc.width += c->bw * 2;
+			c->h = wc.height += c->bw * 2;
+		}
+	}
+
 	XConfigureWindow(dpy, c->win, CWX|CWY|CWWidth|CWHeight|CWBorderWidth, &wc);
 	configure(c);
 	XSync(dpy, False);
@@ -1704,6 +1733,7 @@ setup(void)
 	XChangeWindowAttributes(dpy, root, CWEventMask|CWCursor, &wa);
 	XSelectInput(dpy, root, wa.event_mask);
 	grabkeys();
+  run_barM();
 	focus(NULL);
 }
 
