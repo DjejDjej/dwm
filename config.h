@@ -78,31 +78,31 @@ static const char *togglelayoutcmd[] = { "changeLayout", NULL };
 static const char *screenshotcmd[] = { "zsh", "-c", "scrot -s /tmp/screenshot.png && xclip -selection clipboard -t image/png /tmp/screenshot.png", NULL };
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                      	XK_r,	   spawn,          {.v = browser } },
+	{ MODKEY,                      	XK_r,	   spawn,            {.v = browser } },
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,          							XK_t, 	   spawn,          {.v = termcmd } },
-	{ MODKEY,												XK_d,	   spawn,		   {.v = discord } },
-	{ MODKEY,												XK_m,	   spawn,	   	   {.v = pavucontrol} },
-	{ MODKEY,												XK_c,	   spawn,	  	   {.v = codium     } },
+	{ MODKEY,												XK_d,	   spawn,		         {.v = discord } },
+	{ MODKEY,												XK_m,	   spawn,	   	       {.v = pavucontrol} },
+	{ MODKEY,												XK_c,	   spawn,	  	       {.v = codium     } },
 	{ MODKEY,             					XK_y,      spawn,          {.v = togglelayoutcmd} },
   { MODKEY,												XK_q,      killclient,     {0} },
 	{ MODKEY,             					XK_End,    quit,           {0} },
-  { MODKEY,     	               	XK_s ,   spawn,          {.v = screenshotcmd } },
+  { MODKEY,     	               	XK_s ,   spawn,            {.v = screenshotcmd } },
 
 
 	///
 	{ MODKEY,                       XK_Up,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_Down,    focusstack,     {.i = -1 } },
 
-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
+	{ MODKEY,                       XK_i,      incnmaster,      {.i = +1 } },
 	{ MODKEY,                       XK_u,      deccnmaster,     {.i = -1 } },
 
-	{ MODKEY,                       XK_j,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_k,      setmfact,       {.f = +0.05} },
+	{ MODKEY,                       XK_j,      setmfact,        {.f = -0.05} },
+	{ MODKEY,                       XK_k,      setmfact,        {.f = +0.05} },
 
-	{ MODKEY,                       XK_Return, zoom,           {0} },
+	{ MODKEY,                       XK_Return, zoom,            {0} },
 	
-	{ MODKEY,        	    			XK_Tab,    shiftviewclients, { .i = +1 } },
+	{ MODKEY,        	    					XK_Tab,    shiftviewclients, { .i = +1 } },
 	{ MODKEY|ShiftMask,            	XK_Tab,    shiftviewclients, { .i = +-1 } },
 
     TAGKEYS(                        XK_1,                           0)
