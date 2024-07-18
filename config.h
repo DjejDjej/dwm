@@ -2,7 +2,7 @@
 
 /* appearance */
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
-static const unsigned int snap      = 2;       /* snap pixel */
+static const unsigned int snap      = 0;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "monospace:size=14" };
@@ -75,6 +75,7 @@ static const char *browser[]  =    {"firefox", NULL };
 static const char *discord[]  =    {"discord",NULL};
 static const char *screenshotcmd[] = { "flameshot", "gui", NULL };
 static const char *togglelayoutcmd[] = { "changeLayout", NULL };
+static const char *shutdown[] = { "shutdown", "now", NULL };
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                      	XK_r,	   spawn,            {.v = browser } },
@@ -84,6 +85,8 @@ static const Key keys[] = {
   { MODKEY,												XK_q,      killclient,     {0} },
 	{ MODKEY,             					XK_End,    quit,           {0} },
   { 0,     	               				XK_Print,   spawn,            {.v = screenshotcmd } },
+	{ MODKEY|ShiftMask,            	XK_End,    spawn, { .v = shutdown} },
+	{ MODKEY,                      	XK_d,	   spawn,            {.v = discord } },
 	///
 	{ MODKEY,                       XK_Up,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_Down,    focusstack,     {.i = -1 } },
