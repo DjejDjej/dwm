@@ -29,7 +29,7 @@ static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 static const Rule rules[] = {
 
 	/* class      		instance    title       tags mask     isfloating   monitor */
-	{ "firefox",        NULL,       NULL,         1,       		0,           -1 },
+	{ "Chromium",        NULL,       NULL,         1,       		0,           -1 },
 	{ "Alacritty",	    NULL,       NULL,         2,       		0,           -1 },
 	{ "discord", 		NULL,       NULL,         8,      		0,           -1 },
 
@@ -71,7 +71,7 @@ static const char *dmenucmd[] =    {"dmenu_ruddn", "-m", dmenumon, "-fn", dmenuf
 
 static const char *rofi[] =    {"rofi", "-show","drun"};
 static const char *termcmd[]  =    {"alacritty", NULL };
-static const char *browser[]  =    {"firefox", NULL };
+static const char *browser[]  =    {"chromium", NULL };
 static const char *discord[]  =    {"discord",NULL};
 static const char *screenshotcmd[] = { "flameshot", "gui", NULL };
 static const char *togglelayoutcmd[] = { "changeLayout", NULL };
