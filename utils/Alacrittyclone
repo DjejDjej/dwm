@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Get the process ID of the currently active window
+ACTIVE_WIN_ID=$(xprop -root | grep "_NET_ACTIVE_WINDOW(WINDOW)" | awk '{print $5}')
+
+# Get the process ID of the terminal running in that window
+PID=$(xprop -id "$ACTIVE_WIN_ID" | grep "_NET_WM_PID(CARDINAL)" | awk '{print $3}')
+
+# Look for the child process of this PID which is likely the shell
+SHELL_PID=$(pgrep -P $PID)
+
+# If there's more than one child process, choose the most recent (the shell)
+if [ -z "$SHELL_PID" ]; then
+  SHELL_PID=$PID
+fi
+
+# Find the current working directory of the shell process
+CWD=$(readlink /proc/$SHELL_PID/cwd)
+
+# Launch a new Alacritty terminal in that directory
+alacritty --working-directory "$CWD"
+
