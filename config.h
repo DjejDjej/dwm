@@ -29,8 +29,8 @@ static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 static const Rule rules[] = {
 
 	/* class      		instance    title       tags mask     isfloating   monitor */
-	{ "Chromium",        NULL,       NULL,         1,       		0,           -1 },
-	{ "Alacritty",	    NULL,       NULL,         2,       		0,           -1 },
+	{ "Chromium",           NULL,       NULL,         1,       		0,           -1 },
+	{ "Alacritty",	        NULL,       NULL,         2,       		0,           -1 },
 	{ "discord", 		NULL,       NULL,         8,      		0,           -1 },
 
 };
@@ -71,7 +71,7 @@ static const char *dmenucmd[] =    {"dmenu_ruddn", "-m", dmenumon, "-fn", dmenuf
 
 static const char *rofi[] =    {"rofi", "-show","drun"};
 static const char *termcmd[]  =    {"alacritty", NULL };
-static const char *browser[]  =    {"chromium", NULL };
+static const char *browser[]  =    {"chromium","--force-dark-mode", NULL };
 static const char *discord[]  =    {"discord",NULL};
 static const char *screenshotcmd[] = { "flameshot", "gui", NULL };
 static const char *togglelayoutcmd[] = { "changeLayout", NULL };
@@ -79,12 +79,12 @@ static const char *shutdown[] = { "shutdown", "now", NULL };
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                      	XK_r,	   spawn,            {.v = browser } },
-	{0 ,                       			XK_Super_L,      spawn,          {.v = rofi } },
-	{ MODKEY,          							XK_t, 	   spawn,          {.v = termcmd } },
-	{ MODKEY,             					XK_y,      spawn,          {.v = togglelayoutcmd} },
-  { MODKEY,												XK_q,      killclient,     {0} },
-	{ MODKEY,             					XK_End,    quit,           {0} },
-  { 0,     	               				XK_Print,   spawn,            {.v = screenshotcmd } },
+	{0 ,                       	XK_Super_L,spawn,          {.v = rofi } },
+	{ MODKEY,          		XK_t, 	   spawn,          {.v = termcmd } },
+	{ MODKEY,             		XK_y,      spawn,          {.v = togglelayoutcmd} },
+  	{ MODKEY,			XK_q,      killclient,     {0} },
+	{ MODKEY,             		XK_End,    quit,           {0} },
+	{ 0,     	               	XK_Print,   spawn,            {.v = screenshotcmd } },
 	{ MODKEY|ShiftMask,            	XK_End,    spawn, { .v = shutdown} },
 	{ MODKEY,                      	XK_d,	   spawn,            {.v = discord } },
 	///
