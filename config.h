@@ -83,6 +83,7 @@ static const char *discord[] = { "discord", NULL };
 
 
 
+
 static const Key keys[] = {
     /* modifier                     key        function        argument */
     { MODKEY,                       XK_r,      spawn,          {.v = browser } },
@@ -95,7 +96,7 @@ static const Key keys[] = {
     { MODKEY,                       XK_x,      spawn,          {.v = keepass } },
     { MODKEY,                       XK_d,      spawn,          {.v = discord} },
     { 0,                            XK_Print,  spawn,          {.v = screenshotcmd } },
-    { 0,                            XK_Super_L,spawn,         {.v = rofi } },
+    { 0,                            XK_Super_L,spawn,          {.v = rofi } },
     { MODKEY,                       XK_Up,     focusstack,     {.i = +1 } },
     { MODKEY,                       XK_Down,   focusstack,     {.i = -1 } },
     { MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
@@ -105,6 +106,7 @@ static const Key keys[] = {
     { MODKEY,                       XK_Return, zoom,           {0} },
     { MODKEY,                       XK_Tab,    shiftviewclients, {.i = +1 } },
     { MODKEY|ShiftMask,             XK_Tab,    shiftviewclients, {.i = -1 } },
+
     TAGKEYS(                        XK_1,                           0)
     TAGKEYS(                        XK_2,                           1)
     TAGKEYS(                        XK_3,                           2)
@@ -115,6 +117,7 @@ static const Key keys[] = {
     TAGKEYS(                        XK_8,                           7)
     TAGKEYS(                        XK_9,                           8)
     TAGKEYS(                        XK_plus,                        0)
+    TAGKEYS(                        XK_ecaron,                      1)  // ě
     TAGKEYS(                        XK_scaron,                      2)  // š
     TAGKEYS(                        XK_ccaron,                      3)  // č
     TAGKEYS(                        XK_rcaron,                      4)  // ř
