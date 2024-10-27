@@ -30,7 +30,7 @@ static const Rule rules[] = {
 
 	/* class      		instance    title       tags mask     isfloating   monitor */
 	{ "Chromium",       NULL,       NULL,         1,       		0,           -1 },
-	{ "Alacritty",	    NULL,       NULL,         2,       		0,           -1 },
+	{ "kitty",	    NULL,       NULL,         2,       		0,           -1 },
 	{ "KeePassXC",	    NULL,       NULL,         4,       		0,           -1 },
 	{ "zoom",	    NULL,       NULL,         8,       		0,           -1 },
 	{ "pavucontrol",    NULL,       NULL,         16,       	0,           -1 },
@@ -70,8 +70,8 @@ static const Layout layouts[] = {
 /* commands */
 
 static const char *rofi[] =    {"rofi", "-show","drun"};
-static const char *termcmd[]  =    {"alacritty", NULL };
-static const char *termclone[]  =    {"alacrittyClone", NULL };
+static const char *termcmd[]  =    {"kitty", NULL };
+static const char *termclone[]  =    {"kittyx", NULL };
 static const char *browser[]  =    {"chromium", "--force-dark-mode",NULL };
 static const char *screenshotcmd[] = { "flameshot", "gui", NULL };
 static const char *togglelayoutcmd[] = { "changeLayout", NULL };

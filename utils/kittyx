@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 # Get the process ID of the currently active window
@@ -17,6 +18,5 @@ fi
 # Find the current working directory of the shell process
 CWD=$(readlink /proc/$SHELL_PID/cwd)
 
-# Launch a new Alacritty terminal in that directory
-alacritty --working-directory "$CWD"
-
+# Launch a new Kitty terminal in that directory
+kitty --directory "$CWD"
