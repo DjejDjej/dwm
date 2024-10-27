@@ -1,23 +1,30 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 0;        /* border pixel of windows */
-static const unsigned int snap      = 0;       /* snap pixel */
+
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=14" };
+static const unsigned int borderpx  = 0;        /* border pixel of windows */
+static const unsigned int snap      = 0;       /* snap pixel */
 static const char *barlayout        = "tn|s	";
+static unsigned int baralpha        = 167;
+static unsigned int borderalpha     = OPAQUE;
+
 static const char dmenufont[]       = "monospace:size=13";
+static const char *fonts[]          = { "monospace:size=14" };
+
+static const int startwithgaps	     =  0;	 /* 1 means gaps are used by default */
+static const unsigned int gappx     = 10;       /* default gap between windows in pixels */
+
 static const char col_black[]       = "#000000";
 static const char col_white[]       = "#ffffff";
-static const char col_grey[]       = "#606060";
-static const char normfgcolor[]     = "#0dcdcd";  // Normal foreground color
-static const char col_term[]     = "#1a1d23";  // Normal foreground color
+static const char col_term[]     = "#1a1d23";
+
 
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_white, col_term, col_term },
-	[SchemeSel]  = { col_white, col_term,  col_term  },
+	[SchemeNorm] = { col_white,col_black,col_black },
+	[SchemeSel]  = { col_white,col_black,col_black},
 };
 
 
@@ -83,7 +90,6 @@ static const char *discord[] = { "discord", NULL };
 
 
 
-
 static const Key keys[] = {
     /* modifier                     key        function        argument */
     { MODKEY,                       XK_r,      spawn,          {.v = browser } },
@@ -97,16 +103,16 @@ static const Key keys[] = {
     { MODKEY,                       XK_d,      spawn,          {.v = discord} },
     { 0,                            XK_Print,  spawn,          {.v = screenshotcmd } },
     { 0,                            XK_Super_L,spawn,          {.v = rofi } },
-    { MODKEY,                       XK_Up,     focusstack,     {.i = +1 } },
-    { MODKEY,                       XK_Down,   focusstack,     {.i = -1 } },
+    { MODKEY,                       XK_n,      focusstack,     {.i = +1 } },
+    { MODKEY,                       XK_m,      focusstack,     {.i = -1 } },
     { MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
     { MODKEY,                       XK_u,      deccnmaster,    {.i = -1 } },
     { MODKEY,                       XK_j,      setmfact,       {.f = -0.05} },
     { MODKEY,                       XK_k,      setmfact,       {.f = +0.05} },
-    { MODKEY,                       XK_Return, zoom,           {0} },
+    { MODKEY,                       XK_o,      zoom,           {0} },
     { MODKEY,                       XK_Tab,    shiftviewclients, {.i = +1 } },
     { MODKEY|ShiftMask,             XK_Tab,    shiftviewclients, {.i = -1 } },
-
+    { MODKEY,	                    XK_g,      setgaps,          {.i = GAP_TOGGLE} },
     TAGKEYS(                        XK_1,                           0)
     TAGKEYS(                        XK_2,                           1)
     TAGKEYS(                        XK_3,                           2)
