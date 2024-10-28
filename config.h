@@ -7,9 +7,8 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int snap      = 0;       /* snap pixel */
 static const char *barlayout        = "tn|s	";
-static unsigned int baralpha        = 167;
+static unsigned int baralpha        = 160;
 static unsigned int borderalpha     = OPAQUE;
-
 static const char dmenufont[]       = "monospace:size=13";
 static const char *fonts[]          = { "monospace:size=14" };
 
@@ -23,8 +22,8 @@ static const char col_term[]     = "#1a1d23";
 
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_white,col_black,col_black },
-	[SchemeSel]  = { col_white,col_black,col_black},
+	[SchemeNorm] = { col_white,col_term,col_term},
+	[SchemeSel]  = { col_white,col_term,col_term},
 };
 
 
@@ -40,6 +39,7 @@ static const Rule rules[] = {
 	{ "kitty",	    NULL,       NULL,         2,       		0,           -1 },
 	{ "KeePassXC",	    NULL,       NULL,         4,       		0,           -1 },
 	{ "zoom",	    NULL,       NULL,         8,       		0,           -1 },
+	{ "discord",	    NULL,       NULL,         4,       		0,           -1 },
 	{ "pavucontrol",    NULL,       NULL,         16,       	0,           -1 },
 
 };
@@ -76,7 +76,10 @@ static const Layout layouts[] = {
 
 /* commands */
 
-static const char *rofi[] =    {"rofi", "-show","drun"};
+static const char *dmenu[] =    {"dmenu_fav"};
+static const char *dmenu_all[] =    {"dmenu_all"};
+
+
 static const char *termcmd[]  =    {"kitty", NULL };
 static const char *termclone[]  =    {"kittyx", NULL };
 static const char *browser[]  =    {"chromium", "--force-dark-mode",NULL };
@@ -102,7 +105,8 @@ static const Key keys[] = {
     { MODKEY,                       XK_x,      spawn,          {.v = keepass } },
     { MODKEY,                       XK_d,      spawn,          {.v = discord} },
     { 0,                            XK_Print,  spawn,          {.v = screenshotcmd } },
-    { 0,                            XK_Super_L,spawn,          {.v = rofi } },
+    { 0,                            XK_Super_L,spawn,          {.v = dmenu} },
+    { MODKEY|ShiftMask,              XK_p,      spawn,          {.v = dmenu_all} },
     { MODKEY,                       XK_m,      focusstack,     {.i = +1 } },
     { MODKEY,                       XK_n,      focusstack,     {.i = -1 } },
     { MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
