@@ -23,7 +23,7 @@
 
 ## Keybindings
 
-- Modkey = alt
+- **Modkey ** = alt
 
 - **MODKEY + r**: Launch **Chromium** in dark mode (web browser).
 - **MODKEY + t**: Launch **kitty** (default terminal).
@@ -35,7 +35,6 @@
 - **MODKEY + x**: Open **KeePassXC** (a password manager).
 - **MODKEY + d**: Open **Discord** (messaging app).
 - **MODKEY + Print**: Take a **screenshot** (using the specified screenshot tool).
-- **MODKEY + Super + l**: Launch **dmenu** (a program launcher for quickly finding and opening applications).
 - **MODKEY + e**: **Cycle through windows** in the current stack in reverse order.
 - **MODKEY + i**: **Add a window to the master area** (increases the number of master windows in the layout).
 - **MODKEY + u**: **Remove a window from the master area** (decreases the number of master windows).
