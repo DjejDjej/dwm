@@ -23,7 +23,7 @@
 
 ## Keybindings
 
-- **Modkey ** = alt
+- *Modkey* = alt
 
 - **MODKEY + r**: Launch **Chromium** in dark mode (web browser).
 - **MODKEY + t**: Launch **kitty** (default terminal).
