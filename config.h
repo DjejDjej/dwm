@@ -39,9 +39,9 @@ static const Rule rules[] = {
 	{ "kitty",	    NULL,       NULL,         2,       		0,           -1 },
 	{ "KeePassXC",	    NULL,       NULL,         4,       		0,           -1 },
 	{ "zoom",	    NULL,       NULL,         8,       		0,           -1 },
-	{ "discord",	    NULL,       NULL,         4,       		0,           -1 },
+	{ "discord",	    NULL,       NULL,         8,       		0,           -1 },
 	{ "pavucontrol",    NULL,       NULL,         16,       	0,           -1 },
-
+	{ "rnote",	    NULL,       NULL,         128,       	0,           -1 },
 };
 
 /* layout(s) */
@@ -88,7 +88,7 @@ static const char *togglelayoutcmd[] = { "changeLayout", NULL };
 static const char *keepass[]  =    {"keepassxc", NULL };
 static const char *lock[] = { "slock", NULL };
 static const char *discord[] = { "discord", NULL };
-
+static const char *rnote[] = { "rnote", NULL };
 
 
 
@@ -104,6 +104,7 @@ static const Key keys[] = {
     { MODKEY,                       XK_l,      spawn,          {.v = lock } },
     { MODKEY,                       XK_x,      spawn,          {.v = keepass } },
     { MODKEY,                       XK_d,      spawn,          {.v = discord} },
+    { MODKEY,                       XK_p,      spawn,          {.v = rnote} },
     { 0,                            XK_Print,  spawn,          {.v = screenshotcmd } },
     { 0,                            XK_Super_L,spawn,          {.v = dmenu} },
     { MODKEY,                       XK_e,      focusstack,     {.i = -1 } },
@@ -114,7 +115,6 @@ static const Key keys[] = {
     { MODKEY,                       XK_o,      zoom,           {0} },
     { MODKEY,                       XK_Tab,    shiftviewclients, {.i = +1 } },
     { MODKEY|ShiftMask,             XK_Tab,    shiftviewclients, {.i = -1 } },
-    { MODKEY,	                    XK_g,      setgaps,          {.i = GAP_TOGGLE} },
     TAGKEYS(                        XK_1,                           0)
     TAGKEYS(                        XK_2,                           1)
     TAGKEYS(                        XK_3,                           2)
