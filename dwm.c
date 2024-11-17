@@ -541,14 +541,7 @@ void buttonpress(XEvent *e) {
           click == ClkTagBar && buttons[i].arg.i == 0 ? &arg : &buttons[i].arg);
 }
 
-void checkotherwm(void) {
-  xerrorxlib = XSetErrorHandler(xerrorstart);
-  /* this causes an error if some other window manager is running */
-  XSelectInput(dpy, DefaultRootWindow(dpy), SubstructureRedirectMask);
-  XSync(dpy, False);
-  XSetErrorHandler(xerror);
-  XSync(dpy, False);
-}
+
 
 void cleanup(void) {
   Arg a = {.ui = ~0};
@@ -2249,7 +2242,6 @@ int main(int argc, char *argv[]) {
     fputs("warning: no locale support\n", stderr);
   if (!(dpy = XOpenDisplay(NULL)))
     die("dwm: cannot open display");
-  checkotherwm();
   setup();
 #ifdef __OpenBSD__
   if (pledge("stdio rpath proc exec", NULL) == -1)
