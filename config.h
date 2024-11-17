@@ -15,15 +15,14 @@ static const char *fonts[]          = { "monospace:size=14" };
 static const int startwithgaps	     =  0;	 /* 1 means gaps are used by default */
 static const unsigned int gappx     = 10;       /* default gap between windows in pixels */
 
-static const char col_black[]       = "#000000";
+static const char col_black[]       = "#1a1d23";
 static const char col_white[]       = "#ffffff";
-static const char col_term[]     = "#1a1d23";
 
 
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_white,col_term,col_term},
-	[SchemeSel]  = { col_white,col_term,col_term},
+	[SchemeNorm] = { col_white,col_black,col_black},
+	[SchemeSel]  = { col_white,col_black,col_black},
 };
 
 
@@ -42,6 +41,8 @@ static const Rule rules[] = {
 	{ "discord",	    NULL,       NULL,         8,       		0,           -1 },
 	{ "pavucontrol",    NULL,       NULL,         16,       	0,           -1 },
 	{ "rnote",	    NULL,       NULL,         128,       	0,           -1 },
+	{ "feh",	    NULL,       NULL,         128,       	0,           -1 },
+	{ "vlc",	    NULL,       NULL,         128,       	0,           -1 },
 };
 
 /* layout(s) */
