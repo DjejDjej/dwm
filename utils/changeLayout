@@ -1,13 +1,14 @@
 #!/bin/bash
 
-# Get the current layout
+# Get the current keyboard layout
 current_layout=$(setxkbmap -query | grep layout | awk '{print $2}')
 
-# Toggle between cz and cz_custom
+# Toggle between layouts and ensure Caps Lock is remapped to Escape
 if [ "$current_layout" == "cz" ]; then
-    setxkbmap us_qwertz   
-
+    # Switch to us_qwertz and remap Caps Lock to Escape
+    setxkbmap us_qwertz -option caps:escape
 else
-    setxkbmap cz
+    # Switch to cz and remap Caps Lock to Escape
+    setxkbmap cz -option caps:escape
 fi
-echo "WWWWWw"
+

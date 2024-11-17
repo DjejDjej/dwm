@@ -78,7 +78,6 @@ static const Layout layouts[] = {
 /* commands */
 
 static const char *dmenu[] =    {"dmenu_fav"};
-static const char *dmenu_all[] =    {"dmenu_all"};
 
 
 static const char *termcmd[]  =    {"kitty", NULL };

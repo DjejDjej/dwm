@@ -21,9 +21,11 @@
 
 static const char * date(void);
 static const char * battery_status(void);
+static const char * keyboard_layout(void);
 static void XSetRoot(const char *name);
 /* Append here your functions */
 static const char*(*const functab[])(void) = {
+    keyboard_layout,
     battery_status,
     date
 };
@@ -41,21 +43,58 @@ int main(void) {
         int left = sizeof(status), i;
         char* sta = off;
         for (i = 0; i < sizeof(functab) / sizeof(functab[0]); ++i) {
-            int ret = snprintf(sta, left, "%s", functab[i]());
-            sta += ret;
-            left -= ret;
-            if (sta >= (status + MAXSTR)) /* When snprintf has to resort to truncating a string it will return the length as if it were not truncated. */
-                break;
-            if (i < sizeof(functab) / sizeof(functab[0]) - 1) {
-                ret = snprintf(sta, left, " ┃ ");
+            const char *result = functab[i]();
+            if (result[0] != '\0') { // Only append non-empty results
+                int ret = snprintf(sta, left, "%s", result);
                 sta += ret;
                 left -= ret;
+                if (sta >= (status + MAXSTR)) /* When snprintf has to resort to truncating a string it will return the length as if it were not truncated. */
+                    break;
+                if (i < sizeof(functab) / sizeof(functab[0]) - 1) {
+                    // Check if the next function produces non-empty output
+                    int next_index = i + 1;
+                    while (next_index < sizeof(functab) / sizeof(functab[0]) && functab[next_index]()[0] == '\0') {
+                        next_index++;
+                    }
+                    if (next_index < sizeof(functab) / sizeof(functab[0])) {
+                        int sep_ret = snprintf(sta, left, " ┃ ");
+                        sta += sep_ret;
+                        left -= sep_ret;
+                    }
+                }
             }
         }
         XSetRoot(status);
         sleep(1);
     }
     return 0;
+}
+
+/* Returns the keyboard layout */
+static const char * keyboard_layout(void) {
+    static char layout[MAXSTR];
+    FILE *fp;
+    char layout_buf[32];
+
+    /* Check the keyboard layout */
+    fp = popen("setxkbmap -query | grep layout | awk '{print $2}'", "r");
+    if (fp == NULL) {
+        perror("Failed to get keyboard layout");
+        return "";
+    }
+    fgets(layout_buf, sizeof(layout_buf), fp);
+    pclose(fp);
+
+    /* Remove the newline character */
+    layout_buf[strcspn(layout_buf, "\n")] = 0;
+
+    if (strcmp(layout_buf, "cz") == 0) {
+        snprintf(layout, MAXSTR, "CZ");
+    } else {
+        snprintf(layout, MAXSTR, "EN");
+    }
+
+    return layout;
 }
 
 /* Returns the date */

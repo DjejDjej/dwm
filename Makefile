@@ -6,7 +6,11 @@ include config.mk
 SRC = drw.c dwm.c util.c
 OBJ = ${SRC:.c=.o}
 
+UTILS = barM.c kittyx changeLayout
+
 all: dwm
+
+full: dwm utils
 
 .c.o:
 	${CC} -c ${CFLAGS} $<
@@ -19,8 +23,16 @@ config.h:
 dwm: ${OBJ}
 	${CC} -o $@ ${OBJ} ${LDFLAGS}
 
+utils: barM
+	cp -f ./utils/kittyx ${DESTDIR}${PREFIX}/bin
+	cp -f ./utils/changeLayout ${DESTDIR}${PREFIX}/bin
+
+barM:
+	gcc -o ./utils/barM ./utils/barM.c -O2 -s -lX11
+	cp -f ./utils/barM ${DESTDIR}${PREFIX}/bin
+
 clean:
-	rm -f dwm ${OBJ} dwm-${VERSION}.tar.gz
+	rm -f dwm ${OBJ} dwm-${VERSION}.tar.gz ./utils/barM
 
 dist: clean
 	mkdir -p dwm-${VERSION}
@@ -34,12 +46,10 @@ install: all
 	mkdir -p ${DESTDIR}${PREFIX}/bin
 	cp -f dwm ${DESTDIR}${PREFIX}/bin
 	chmod 755 ${DESTDIR}${PREFIX}/bin/dwm
-	mkdir -p ${DESTDIR}${MANPREFIX}/man1
-	sed "s/VERSION/${VERSION}/g" < dwm.1 > ${DESTDIR}${MANPREFIX}/man1/dwm.1
-	chmod 644 ${DESTDIR}${MANPREFIX}/man1/dwm.1
 
 uninstall:
 	rm -f ${DESTDIR}${PREFIX}/bin/dwm\
 		${DESTDIR}${MANPREFIX}/man1/dwm.1
 
-.PHONY: all clean dist install uninstall
+.PHONY: all clean dist install uninstall full
+
