@@ -77,8 +77,8 @@ static const Layout layouts[] = {
 
 /* commands */
 
-static const char *dmenu[] =    {"dmenu_fav"};
 
+static const char *rofi[] =    {"rofi", "-show","drun"};
 
 static const char *termcmd[]  =    {"kitty", NULL };
 static const char *termclone[]  =    {"kittyx", NULL };
@@ -106,7 +106,7 @@ static const Key keys[] = {
     { MODKEY,                       XK_d,      spawn,          {.v = discord} },
     { MODKEY,                       XK_p,      spawn,          {.v = rnote} },
     { 0,                            XK_Print,  spawn,          {.v = screenshotcmd } },
-    { 0,                            XK_Super_L,spawn,          {.v = dmenu} },
+    { 0,                            XK_Super_L,spawn,          {.v = rofi } },
     { MODKEY,                       XK_e,      focusstack,     {.i = -1 } },
     { MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
     { MODKEY,                       XK_u,      deccnmaster,    {.i = -1 } },
