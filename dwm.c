@@ -64,6 +64,7 @@
 #define GAP_TOGGLE 100
 #define GAP_RESET 0
 
+#define TITLE_MAX_LENGHT 65 
 #define OPAQUE 0xffU
 
 /* enums */
@@ -2093,12 +2094,22 @@ void updatestatus(void) {
   drawbar(selmon);
 }
 
+
+
 void updatetitle(Client *c) {
-  if (!gettextprop(c->win, netatom[NetWMName], c->name, sizeof c->name))
-    gettextprop(c->win, XA_WM_NAME, c->name, sizeof c->name);
+  if (!gettextprop(c->win, netatom[NetWMName], c->name, sizeof(c->name)))
+    gettextprop(c->win, XA_WM_NAME, c->name, sizeof(c->name));
   if (c->name[0] == '\0') /* hack to mark broken clients */
     strcpy(c->name, broken);
+
+  /* If title length is >= TITLE_MAX_LENGHT, truncate to TITLE_MAX_LENGHT - 3 and append ".." */
+  if (strlen(c->name) >= TITLE_MAX_LENGHT) {
+    c->name[TITLE_MAX_LENGHT - 3] = '\0';
+    strcat(c->name, "...");
+  }
 }
+
+
 
 void updatewindowtype(Client *c) {
   Atom state = getatomprop(c, netatom[NetWMState]);
